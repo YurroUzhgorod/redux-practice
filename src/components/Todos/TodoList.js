@@ -1,12 +1,17 @@
 import Todo from "./Todo";
 import styles from "./TodoList.module.css";
+import { useSelector } from "react-redux";
 
-function TodoList({ todos, deleteTodo }) {
+function TodoList() {
+  const todos = useSelector((state) => {
+    return state.todos;
+  });
+
   return (
     <div className={styles.todoListContainer}>
       {!todos.length && <h2> Todo list is empty</h2>}
-      {todos.map((todo, index) => (
-        <Todo key={index} todo={todo} index={index} deleteTodo={deleteTodo} />
+      {todos.map((todo) => (
+        <Todo key={todo.id} todo={todo} />
       ))}
     </div>
   );

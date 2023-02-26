@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodoAction } from "../../store/action";
 import styles from "./TodoForm.module.css";
 
-function TodoForm({ addTodo }) {
+function TodoForm() {
   const [text, setText] = useState("");
+  const dispatch = useDispatch();
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    addTodo(text);
+    if (text) dispatch(addTodoAction(text));
     setText("");
   };
 
@@ -16,7 +19,7 @@ function TodoForm({ addTodo }) {
   };
   return (
     <div className={styles.todoFormContainer}>
-      <form onSubmit={onSubmitHandler}>
+      <form>
         <input
           placeholder="Enter new todo"
           value={text}
